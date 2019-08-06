@@ -1,0 +1,11 @@
+.menu:hover, .menu:showing, .menu-item:focused {
+	-fx-background-color: burlywood;
+}
+
+.button, .button:focused {
+    -fx-background-color: transparent;
+}
+
+.button:pressed {
+    -fx-text-fill: burlywood;
+}
