@@ -64,22 +64,10 @@ public class LogicController {
 		return new DateFormatSymbols().getMonths()[monthNumber - 1];
 	}
 	
-	public static String getIncomeTotal(int amount) {
-		totalIncome += amount;
-		String incomeTotalLabel = fmt.format(totalIncome);
-		return incomeTotalLabel;
-	}
-	
-	public static String getExpensesTotal(int amount) {
-		totalExpenses += amount;
-		String expensesTotalLabel = fmt.format(totalExpenses);
-		return expensesTotalLabel;
-	}
-	
-	public static String getMoneyTotal(int amount) {
-		totalFunds += amount;
-		String totalLabel = fmt.format(totalFunds);
-		return totalLabel;
+	public static String getFormattedTotal(double currentTotal, int amount) {
+		currentTotal += amount;
+		String total = fmt.format(currentTotal);
+		return total;
 	}
 	
 }
