@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SceneController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
+      <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="450.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Coffee Budgeting">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#returnScene" text="Return" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="450.0" text="About">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="100.0" prefHeight="450.0" prefWidth="426.0" text="This application was made as a project for PRO100 Introductory Software Projects. It is made entirely in Java with the use of JavaFX for the GUI. ------------------------------ Created by Timothy Sely, Joshua Conlon, Kevin, and Dakota." textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
