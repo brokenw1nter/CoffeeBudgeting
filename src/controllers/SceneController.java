@@ -49,6 +49,14 @@ public class SceneController {
 		monthYearLabel.setText(LogicController.nextMonth());
 	}
 	
+	@FXML public void previousPage(InputEvent event) {
+		pageLabel.setText(LogicController.previousPage());
+	}
+	
+	@FXML public void nextPage(InputEvent event) {
+		pageLabel.setText(LogicController.nextPage());
+	}
+	
 	@FXML public void newTransaction(InputEvent event) {
 		changeScene("/fxmls/NewTransaction.fxml");
 	}
@@ -116,6 +124,7 @@ public class SceneController {
 		expensesLabel.setTextFill(Color.RED);
 		expensesLabel.setText("$54.48");
 		totalLabel.setText("$70.52");
+		pageLabel.setText(LogicController.getCurrentMaxPages());
 	}
 	
 	public void changeScene(String path) {

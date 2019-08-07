@@ -6,9 +6,10 @@ import java.text.DateFormatSymbols;
 
 public class LogicController {
 	
-	private static int page;
 	private static int year;
+	private static int page = 1;
 	private static int monthNumber;
+	private static int maxPages = 2;
 	private static String monthName;
 	private static String monthYearLabel;
 	private static double money;
@@ -46,6 +47,20 @@ public class LogicController {
 		return monthYearLabel;
 	}
 	
+	public static String previousPage() {
+		if(page != 1) {
+			page--;
+		}
+		return "Page: " + page + "/" + maxPages;
+	}
+	
+	public static String nextPage() {
+		if(page != maxPages) {
+			page++;
+		}
+		return "Page: " + page + "/" + maxPages;
+	}
+	
 	public static void addTransaction() {
 		System.out.println("Add Transaction is Working");
 	}
@@ -62,6 +77,10 @@ public class LogicController {
 	
 	public static String getMonthName(int monthNumber) {
 		return new DateFormatSymbols().getMonths()[monthNumber - 1];
+	}
+	
+	public static String getCurrentMaxPages() {
+		return "Page: " + page + "/" + maxPages;
 	}
 	
 	public static String getFormattedTotal(double currentTotal, int amount) {
