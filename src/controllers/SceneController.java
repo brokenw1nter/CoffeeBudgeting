@@ -13,6 +13,7 @@ import javafx.scene.input.InputEvent;
 public class SceneController {
 	
 	private static String previousScene = "Main";
+	private static String previousTab = "NewTransaction";
 	
 	@FXML private MenuBar menuBar = new MenuBar();
 	@FXML private Label monthYearLabel = new Label();
@@ -35,6 +36,9 @@ public class SceneController {
 	@FXML private Label fifthDayName = new Label();
 	@FXML private Label fifthLabel = new Label();
 	@FXML private Label pageLabel = new Label();
+	@FXML private Label transactionLabel = new Label();
+	@FXML private Label accountLabel = new Label();
+	@FXML private Label categoryLabel = new Label();
 	
 	// --------- Methods for Buttons ----------
 	@FXML public void previousMonth(InputEvent event) {
@@ -47,6 +51,35 @@ public class SceneController {
 	
 	@FXML public void newTransaction(InputEvent event) {
 		changeScene("/fxmls/NewTransaction.fxml");
+	}
+	
+	@FXML public void incomeTransaction(InputEvent event) {
+		if(previousTab == "NewTransaction") {
+			transactionLabel.setText("Income");
+		} else if(previousTab == "IncomeExpense") {
+			previousTab = "NewTransaction";
+			transactionLabel.setText("Income");
+			accountLabel.setText("Account:");
+			categoryLabel.setText("Category:");
+		}
+	}
+	
+	@FXML public void expenseTransaction(InputEvent event) {
+		if(previousTab == "NewTransaction") {
+			transactionLabel.setText("Expense");
+		} else if(previousTab == "IncomeExpense") {
+			previousTab = "NewTransaction";
+			transactionLabel.setText("Expense");
+			accountLabel.setText("Account:");
+			categoryLabel.setText("Category:");
+		}
+	}
+	
+	@FXML public void transferTransaction(InputEvent event) {
+		previousTab = "IncomeExpense";
+		transactionLabel.setText("Transfer");
+		accountLabel.setText("From:");
+		categoryLabel.setText("To:");
 	}
 	
 	@FXML public void cancelTransaction(InputEvent event) {
