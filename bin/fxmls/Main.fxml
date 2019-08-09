@@ -30,7 +30,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="monthYearLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="25.0" prefHeight="75.0" prefWidth="300.0" text="July 2020">
+      <Label fx:id="monthYearLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="25.0" prefHeight="75.0" prefWidth="300.0">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -45,7 +45,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="incomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" text="\$20.00">
+      <Label fx:id="incomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="125.0" prefHeight="25.0" prefWidth="150.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -55,7 +55,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="expensesLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" text="\$200.00">
+      <Label fx:id="expensesLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -65,82 +65,82 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="totalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" text="\$2,000.00">
+      <Label fx:id="totalLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="firstDay" alignment="CENTER" contentDisplay="CENTER" layoutY="150.0" prefHeight="50.0" prefWidth="112.0" text="20">
+      <Label fx:id="firstDay" alignment="CENTER" contentDisplay="CENTER" layoutY="150.0" prefHeight="50.0" prefWidth="112.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="firstDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="200.0" prefHeight="25.0" prefWidth="112.0" text="Monday">
+      <Label fx:id="firstDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="200.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="firstLabel" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" text="First Day Log">
+      <Label fx:id="firstLabel" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="secondDay" alignment="CENTER" contentDisplay="CENTER" layoutY="225.0" prefHeight="50.0" prefWidth="112.0" text="18">
+      <Label fx:id="secondDay" alignment="CENTER" contentDisplay="CENTER" layoutY="225.0" prefHeight="50.0" prefWidth="112.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="secondDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="275.0" prefHeight="25.0" prefWidth="112.0" text="Saturday">
+      <Label fx:id="secondDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="275.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="secondLabel" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0" text="Second Day Log">
+      <Label fx:id="secondLabel" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="thirdDay" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="50.0" prefWidth="112.0" text="12">
+      <Label fx:id="thirdDay" alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="50.0" prefWidth="112.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="thirdDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="350.0" prefHeight="25.0" prefWidth="112.0" text="Sunday">
+      <Label fx:id="thirdDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="350.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="thirdLabel" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0" text="Third Day Log">
+      <Label fx:id="thirdLabel" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="fourthDay" alignment="CENTER" contentDisplay="CENTER" layoutY="375.0" prefHeight="50.0" prefWidth="112.0" text="4">
+      <Label fx:id="fourthDay" alignment="CENTER" contentDisplay="CENTER" layoutY="375.0" prefHeight="50.0" prefWidth="112.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="fourthDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="425.0" prefHeight="25.0" prefWidth="112.0" text="Saturday">
+      <Label fx:id="fourthDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="425.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="fourthLabel" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0" text="Fourth Day Log">
+      <Label fx:id="fourthLabel" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="fifthDay" alignment="CENTER" contentDisplay="CENTER" layoutY="450.0" prefHeight="50.0" prefWidth="112.0" text="2">
+      <Label fx:id="fifthDay" alignment="CENTER" contentDisplay="CENTER" layoutY="450.0" prefHeight="50.0" prefWidth="112.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="fifthDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="500.0" prefHeight="25.0" prefWidth="112.0" text="Thursday">
+      <Label fx:id="fifthDayName" alignment="CENTER" contentDisplay="CENTER" layoutY="500.0" prefHeight="25.0" prefWidth="112.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="fifthLabel" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0" text="Fifth Day Log">
+      <Label fx:id="fifthLabel" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
@@ -150,7 +150,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="525.0" prefHeight="75.0" prefWidth="225.0" text="Page: 1/1">
+      <Label fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="525.0" prefHeight="75.0" prefWidth="225.0">
          <font>
             <Font size="24.0" />
          </font>

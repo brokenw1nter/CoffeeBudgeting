@@ -73,23 +73,23 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <DatePicker layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" />
-      <TextField layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0">
+      <DatePicker fx:id="dateSelected" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" />
+      <TextField fx:id="accountFromField" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0">
+      <TextField fx:id="categoryToField" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0">
+      <TextField fx:id="amountField" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <TextField layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0">
+      <TextField fx:id="contentField" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0">
          <font>
             <Font size="16.0" />
          </font>

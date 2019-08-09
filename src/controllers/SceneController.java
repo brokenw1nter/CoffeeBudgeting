@@ -9,9 +9,12 @@ import javafx.scene.control.Label;
 import javafx.application.Platform;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 
 public class SceneController {
 	
+	private static String currentScene = "Main";
 	private static String previousScene = "Main";
 	private static String previousTab = "NewTransaction";
 	
@@ -39,6 +42,11 @@ public class SceneController {
 	@FXML private Label transactionLabel = new Label();
 	@FXML private Label accountLabel = new Label();
 	@FXML private Label categoryLabel = new Label();
+	@FXML private DatePicker dateSelected = new DatePicker();
+	@FXML private TextField accountFromField = new TextField();
+	@FXML private TextField categoryToField = new TextField();
+	@FXML private TextField amountField = new TextField();
+	@FXML private TextField contentField = new TextField();
 	
 	// --------- Methods for Buttons ----------
 	@FXML public void previousMonth(InputEvent event) {
@@ -58,10 +66,12 @@ public class SceneController {
 	}
 	
 	@FXML public void newTransaction(InputEvent event) {
+		currentScene = "Expense";
 		changeScene("/fxmls/NewTransaction.fxml");
 	}
 	
 	@FXML public void incomeTransaction(InputEvent event) {
+		currentScene = "Income";
 		if(previousTab == "NewTransaction") {
 			transactionLabel.setText("Income");
 		} else if(previousTab == "IncomeExpense") {
@@ -73,6 +83,7 @@ public class SceneController {
 	}
 	
 	@FXML public void expenseTransaction(InputEvent event) {
+		currentScene = "Expense";
 		if(previousTab == "NewTransaction") {
 			transactionLabel.setText("Expense");
 		} else if(previousTab == "IncomeExpense") {
@@ -84,6 +95,7 @@ public class SceneController {
 	}
 	
 	@FXML public void transferTransaction(InputEvent event) {
+		currentScene = "Transfer";
 		previousTab = "IncomeExpense";
 		transactionLabel.setText("Transfer");
 		accountLabel.setText("From:");
@@ -91,19 +103,22 @@ public class SceneController {
 	}
 	
 	@FXML public void cancelTransaction(InputEvent event) {
-		clearTextFields();
+		currentScene = "Main";
 		changeScene("/fxmls/Main.fxml");
 	}
 	
 	@FXML public void confirmTransaction(InputEvent event) {
-		LogicController.addTransaction();
-		clearTextFields();
+		LogicController.addTransaction(currentScene,
+				dateSelected.getValue(), accountFromField.getText(),
+				categoryToField.getText(), amountField.getText(),
+				contentField.getText());
 		changeScene("/fxmls/Main.fxml");
 	}
 	
 	// ------ Methods for Menu Bar Items ------
 	@FXML public void returnScene(ActionEvent event) {
 		if(previousScene == "Main") {
+			currentScene = "Main";
 			changeScene("/fxmls/Main.fxml");
 		}
 	}
@@ -119,11 +134,8 @@ public class SceneController {
 	// ------------ Helper Methods ------------
 	public void initialize() {
 		monthYearLabel.setText(LogicController.getCurrentMonthYear());
-		incomeLabel.setTextFill(Color.BLUE);
-		incomeLabel.setText("$25.00");
-		expensesLabel.setTextFill(Color.RED);
-		expensesLabel.setText("$54.48");
-		totalLabel.setText("$70.52");
+		setTotalFunds();
+		setShortLogs();
 		pageLabel.setText(LogicController.getCurrentMaxPages());
 	}
 	
@@ -139,8 +151,30 @@ public class SceneController {
 		}
 	}
 	
-	public void clearTextFields() {
-		
+	public void setTotalFunds() {
+		incomeLabel.setTextFill(Color.BLUE);
+		incomeLabel.setText(LogicController.getFormattedFunds("Income"));
+		expensesLabel.setTextFill(Color.RED);
+		expensesLabel.setText(LogicController.getFormattedFunds("Expenses"));
+		totalLabel.setText(LogicController.getFormattedFunds("Total"));
+	}
+	
+	public void setShortLogs() {
+		firstDay.setText(LogicController.firstDay);
+		firstDayName.setText(LogicController.firstDayName);
+		firstLabel.setText(LogicController.firstLabel);
+		secondDay.setText(LogicController.secondDay);
+		secondDayName.setText(LogicController.secondDayName);
+		secondLabel.setText(LogicController.secondLabel);
+		thirdDay.setText(LogicController.thirdDay);
+		thirdDayName.setText(LogicController.thirdDayName);
+		thirdLabel.setText(LogicController.thirdLabel);
+		fourthDay.setText(LogicController.fourthDay);
+		fourthDayName.setText(LogicController.fourthDayName);
+		fourthLabel.setText(LogicController.fourthLabel);
+		fifthDay.setText(LogicController.fifthDay);
+		fifthDayName.setText(LogicController.fifthDayName);
+		fifthLabel.setText(LogicController.fifthLabel);
 	}
 	
 }
