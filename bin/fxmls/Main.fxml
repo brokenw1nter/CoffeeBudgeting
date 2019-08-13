@@ -16,9 +16,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Coffee Budgeting">
             <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#newList" text="New" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadList" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveList" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#aboutApplication" text="About" />
               <MenuItem mnemonicParsing="false" onAction="#quitApplication" text="Quit" />
             </items>

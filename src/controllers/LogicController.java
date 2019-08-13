@@ -1,25 +1,23 @@
 package controllers;
 
 import models.Log;
-import java.util.Calendar;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
-
-import java.util.ArrayList;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.text.NumberFormat;
 import java.io.File;
+import java.util.Calendar;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.io.IOException;
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.swing.JFileChooser;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.DateFormatSymbols;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LogicController {
 	
@@ -116,7 +114,7 @@ public class LogicController {
 		jfc.setDialogTitle("Choose a Directory");
 		jfc.setMultiSelectionEnabled(false);
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("TYDE File", "tyde");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CB File", "cb");
 		jfc.addChoosableFileFilter(filter);
 		
 		int returnValue = jfc.showSaveDialog(null);
@@ -162,7 +160,7 @@ public class LogicController {
 		jfc.setDialogTitle("Select a File");
 		jfc.setMultiSelectionEnabled(false);
 		jfc.setAcceptAllFileFilterUsed(false);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("TYDE File", "tyde");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("CB File", "cb");
 		jfc.addChoosableFileFilter(filter);
 		
 		int returnValue = jfc.showOpenDialog(null);

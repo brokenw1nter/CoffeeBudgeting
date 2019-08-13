@@ -116,6 +116,18 @@ public class SceneController {
 	}
 	
 	// ------ Methods for Menu Bar Items ------
+	@FXML public void newList(ActionEvent evnet) {
+		LogicController.newItemList();
+	}
+	
+	@FXML public void loadList(ActionEvent event) {
+		LogicController.loadItemList();
+	}
+	
+	@FXML public void saveList(ActionEvent event) {
+		LogicController.saveItemList();
+	}
+	
 	@FXML public void returnScene(ActionEvent event) {
 		if(previousScene == "Main") {
 			currentScene = "Main";
