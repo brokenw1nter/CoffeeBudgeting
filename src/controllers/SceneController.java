@@ -51,18 +51,26 @@ public class SceneController {
 	// --------- Methods for Buttons ----------
 	@FXML public void previousMonth(InputEvent event) {
 		monthYearLabel.setText(LogicController.previousMonth());
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void nextMonth(InputEvent event) {
 		monthYearLabel.setText(LogicController.nextMonth());
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void previousPage(InputEvent event) {
 		pageLabel.setText(LogicController.previousPage());
+		LogicController.updatePage();
+		setShortLogs();
 	}
 	
 	@FXML public void nextPage(InputEvent event) {
 		pageLabel.setText(LogicController.nextPage());
+		LogicController.updatePage();
+		setShortLogs();
 	}
 	
 	@FXML public void newTransaction(InputEvent event) {
@@ -112,6 +120,8 @@ public class SceneController {
 				dateSelected.getValue(), accountFromField.getText(),
 				categoryToField.getText(), amountField.getText(),
 				contentField.getText());
+		LogicController.updateLogListForMonth();
+		setShortLogs();
 		changeScene("/fxmls/Main.fxml");
 	}
 	
@@ -122,6 +132,8 @@ public class SceneController {
 	
 	@FXML public void loadList(ActionEvent event) {
 		LogicController.loadItemList();
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void saveList(ActionEvent event) {
@@ -146,9 +158,7 @@ public class SceneController {
 	// ------------ Helper Methods ------------
 	public void initialize() {
 		monthYearLabel.setText(LogicController.getCurrentMonthYear());
-		setTotalFunds();
-		setShortLogs();
-		pageLabel.setText(LogicController.getCurrentMaxPages());
+		updateDisplay();
 	}
 	
 	public void changeScene(String path) {
@@ -164,10 +174,11 @@ public class SceneController {
 	}
 	
 	public void setTotalFunds() {
-		incomeLabel.setTextFill(Color.BLUE);
+		incomeLabel.setTextFill(Color.FORESTGREEN);
 		incomeLabel.setText(LogicController.getFormattedFunds("Income"));
 		expensesLabel.setTextFill(Color.RED);
 		expensesLabel.setText(LogicController.getFormattedFunds("Expenses"));
+		totalLabel.setTextFill(Color.BLUE);
 		totalLabel.setText(LogicController.getFormattedFunds("Total"));
 	}
 	
@@ -187,6 +198,12 @@ public class SceneController {
 		fifthDay.setText(LogicController.fifthDay);
 		fifthDayName.setText(LogicController.fifthDayName);
 		fifthLabel.setText(LogicController.fifthLabel);
+	}
+	
+	private void updateDisplay() {
+		setTotalFunds();
+		pageLabel.setText(LogicController.getCurrentMaxPages());
+		setShortLogs();
 	}
 	
 }

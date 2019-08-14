@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.Collections;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 import java.io.FileInputStream;
@@ -24,15 +26,14 @@ public class LogicController {
 	private static int year;
 	private static int month;
 	private static int page = 1;
-	public static int currentLog;
 	private static int maxPages = 1;
 	private static double totalFunds;
 	private static double totalIncome;
 	private static double totalExpenses;
-	private static String transactionType;
 	public static Log logObject;
 	public static String loadedListName = "New List";
-	public static ArrayList<Log> logs = new ArrayList<>();
+	public static ArrayList<Log> allLogs = new ArrayList<>();
+	public static ArrayList<Log> currentLogs = new ArrayList<>();
 	private static NumberFormat fmt = NumberFormat.getCurrencyInstance();
 	
 	public static String firstDay, firstDayName, firstLabel = null;
@@ -84,29 +85,14 @@ public class LogicController {
 	
 	public static void addTransaction(String type, LocalDate date,
 			String accFrom, String catTo, String amount, String cnt) {
-		setLogAndPage();
-		transactionType = type;
-		if(type == "Income") {
-			calculateFunds(amount);
-			logObject = new Log(type, date, accFrom, catTo,
-					Double.parseDouble(amount), cnt);
-			logs.add(logObject);
-			getStoredLogs();
-		} else if(type == "Expense") {
-			calculateFunds(amount);
-			logObject = new Log(type, date, accFrom, catTo,
-					Double.parseDouble(amount), cnt);
-			logs.add(logObject);
-			getStoredLogs();
-		} else if(type == "Transfer") {
-			calculateFunds(amount);
-		}
+		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
+		allLogs.add(logObject);
 	}
 	
 	// ------ Methods for Menu Bar Items ------
 	public static void newItemList() {
 		loadedListName = "New List";
-		logs.clear();
+		allLogs.clear();
 	}
 	
 	public static void saveItemList() {
@@ -137,7 +123,7 @@ public class LogicController {
 			try {
 				fileOut = new FileOutputStream(file);
 				out = new ObjectOutputStream(fileOut);
-				out.writeObject(logs);
+				out.writeObject(allLogs);
 			} catch(IOException ioe) {
 				ioe.printStackTrace();
 				System.out.println("IOException has been caught.");
@@ -181,10 +167,10 @@ public class LogicController {
 			loadedListName = loadedListName.substring(0, loadedListName.length() - 5);
 			
 			try {
-				logs = null;
+				allLogs = null;
 				fileIn = new FileInputStream(file);
 				in = new ObjectInputStream(fileIn);
-				logs = (ArrayList<Log>)in.readObject();
+				allLogs = (ArrayList<Log>)in.readObject();
 			} catch(IOException ioe) {
 				ioe.printStackTrace();
 				System.out.println("IOException has been caught.");
@@ -202,7 +188,7 @@ public class LogicController {
 			}
 		}
 		JOptionPane.showConfirmDialog(null, "Items have been loaded.", "Information", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
-		return logs;
+		return allLogs;
 	}
 	
 	// ------------ Helper Methods ------------
@@ -228,19 +214,24 @@ public class LogicController {
 		return "Page: " + page + "/" + maxPages;
 	}
 	
-	public static void calculateFunds(String amount) {
-		double money = 0;
-		if(transactionType == "Income") {
-			money = Double.parseDouble(amount);
+	public static void calculateFunds(String transactionType, double amount) {
+		double money = amount;
+		if(transactionType.equalsIgnoreCase("Income")) {
 			totalIncome += money;
 			totalFunds += money;
-		} else if(transactionType == "Expense") {
-			money = Double.parseDouble(amount);
+		} else if(transactionType.equalsIgnoreCase("Expense")) {
 			totalExpenses += money;
 			totalFunds -= money;
-		} else if(transactionType == "Transfer") {
-			
+		} else if(transactionType.equalsIgnoreCase("Transfer")) {
+			totalExpenses += money;
+			totalFunds -= money;
 		}
+	}
+	
+	public static void resetFunds() {
+		totalIncome = 0;
+		totalExpenses = 0;
+		totalFunds = 0;
 	}
 	
 	public static String getFormattedFunds(String type) {
@@ -255,64 +246,99 @@ public class LogicController {
 		return value;
 	}
 	
-	public static String getShortenedLog() {
-		String value = null;
-		if(transactionType == "Income") {
-			value = "Received " + fmt.format(logObject.getAmount()) +
-					" into " + logObject.getAccountFrom() +
-					" from " + logObject.getContent() + " for " +
-					logObject.getCategoryTo() + ".";
-		} else if(transactionType == "Expense") {
-			value = "Purchased " + logObject.getCategoryTo() + " from " +
-					logObject.getContent() + " for " +
-					fmt.format(logObject.getAmount()) + " from " +
-					logObject.getAccountFrom() + ".";
-		} else if(transactionType == "Transfer") {
-			
-		}
-		return value;
-	}
-	
-	public static void getStoredLogs() {
-		if(currentLog == 1) {
-			logs.get(0);
-			firstDay = Integer.toString(logObject.getDate().getDayOfMonth());
-			firstDayName = getDayName(logObject.getDate());
-			firstLabel = getShortenedLog();
-		}
-		if(currentLog == 2) {
-			logs.get(1);
-			secondDay = Integer.toString(logObject.getDate().getDayOfMonth());
-			secondDayName = getDayName(logObject.getDate());
-			secondLabel = getShortenedLog();
-		}
-		if(currentLog == 3) {
-			logs.get(2);
-			thirdDay = Integer.toString(logObject.getDate().getDayOfMonth());
-			thirdDayName = getDayName(logObject.getDate());
-			thirdLabel = getShortenedLog();
-		}
-		if(currentLog == 4) {
-			logs.get(3);
-			fourthDay = Integer.toString(logObject.getDate().getDayOfMonth());
-			fourthDayName = getDayName(logObject.getDate());
-			fourthLabel = getShortenedLog();
-		}
-		if(currentLog == 5) {
-			logs.get(4);
-			fifthDay = Integer.toString(logObject.getDate().getDayOfMonth());
-			fifthDayName = getDayName(logObject.getDate());
-			fifthLabel = getShortenedLog();
+	private static void updateLabels(int currentLog, Log log) {
+		switch(currentLog) {
+		case 1:
+			firstDay = Integer.toString(log.getDate().getDayOfMonth());
+			firstDayName = getDayName(log.getDate());
+			firstLabel = log.getLogSummary();
+			break;
+		case 2:
+			secondDay = Integer.toString(log.getDate().getDayOfMonth());
+			secondDayName = getDayName(log.getDate());
+			secondLabel = log.getLogSummary();
+			break;
+		case 3:
+			thirdDay = Integer.toString(log.getDate().getDayOfMonth());
+			thirdDayName = getDayName(log.getDate());
+			thirdLabel = log.getLogSummary();
+			break;
+		case 4:
+			fourthDay = Integer.toString(log.getDate().getDayOfMonth());
+			fourthDayName = getDayName(log.getDate());
+			fourthLabel = log.getLogSummary();
+			break;
+		case 5:
+			fifthDay = Integer.toString(log.getDate().getDayOfMonth());
+			fifthDayName = getDayName(log.getDate());
+			fifthLabel = log.getLogSummary();
+			break;
 		}
 	}
 	
-	public static void setLogAndPage() {
-		currentLog++;
-		if(currentLog == 6) {
-			currentLog = 1;
-			maxPages++;
-			page++;
+	public static void updateLogListForMonth() {
+		clearLabels();
+		currentLogs.clear();
+		resetFunds();
+		
+		for(Log l : allLogs) {
+			if(l.getDate().getMonthValue() == month && l.getDate().getYear() == year) {
+				currentLogs.add(l);
+				calculateFunds(l.getTransactionType(), l.getAmount());
+			}
 		}
+		
+		maxPages = currentLogs.size() / 5;
+		if(currentLogs.size() % 5 > 0) {
+			maxPages += 1;
+		}
+		
+		if(maxPages == 0) {
+			maxPages = 1;
+		}
+		
+		updatePage();
+	}
+	
+	public static void updatePage() {
+		clearLabels();
+		
+		Collections.sort(currentLogs, new Comparator<Log>() {
+			public int compare(Log o1, Log o2) {
+				if(o1.getDate() == null || o2.getDate() == null)
+					return 0;
+				return o1.getDate().compareTo(o2.getDate());
+			}
+		});
+
+		int test = (page - 1) * 5;
+		int logNum = 1;
+
+		for(int i = test; i < test + 5; i++) {
+			if(i < currentLogs.size()) {
+				updateLabels(logNum, currentLogs.get(i));
+				logNum++;
+			}
+		}
+
+	}
+	
+	private static void clearLabels() {
+		firstDay = "";
+		firstDayName = "";
+		firstLabel = "";
+		secondDay = "";
+		secondDayName = "";
+		secondLabel = "";
+		thirdDay = "";
+		thirdDayName = "";
+		thirdLabel = "";
+		fourthDay = "";
+		fourthDayName = "";
+		fourthLabel = "";
+		fifthDay = "";
+		fifthDayName = "";
+		fifthLabel = "";
 	}
 	
 }
