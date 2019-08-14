@@ -163,9 +163,6 @@ public class SceneController {
 //		LogicController.autoLoad();
 //		LogicController.updateLogListForMonth();
 //		LogicController.updatePage();
-//		setTotalFunds();
-//		setShortLogs();
-//		pageLabel.setText(LogicController.getCurrentMaxPages());
 		updateDisplay();
 	}
 	

@@ -32,8 +32,6 @@ public class LogicController {
 	private static double totalFunds;
 	private static double totalIncome;
 	private static double totalExpenses;
-//	private static String transactionType;
-//	public static int currentLog;
 	public static Log logObject;
 	public static String loadedListName = "New List";
 	public static ArrayList<Log> allLogs = new ArrayList<>();
@@ -90,21 +88,7 @@ public class LogicController {
 	public static void addTransaction(String type, LocalDate date, String accFrom, String catTo, String amount,
 			String cnt) {
 		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
-//		setLogAndPage();
-//		transactionType = type;
-		if (type == "Income") {
-//			calculateFunds(amount);
-//			logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
-			allLogs.add(logObject);
-//			getStoredLogs();
-		} else if (type == "Expense") {
-//			calculateFunds(amount);
-//			logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
-			allLogs.add(logObject);
-//			getStoredLogs();
-		} else if (type == "Transfer") {
-//			calculateFunds(amount);
-		}
+		allLogs.add(logObject);
 	}
 
 	// ------ Methods for Menu Bar Items ------
@@ -211,7 +195,6 @@ public class LogicController {
 		return allLogs;
 	}
 
-	
 	//I was using the autoLoad and autoSave methods for testing - Kevin
 //	@SuppressWarnings("unchecked")
 //	public static void autoLoad() {
@@ -320,62 +303,6 @@ public class LogicController {
 		}
 		return value;
 	}
-
-//	public static String getShortenedLog() {
-//		String value = null;
-//		if (transactionType == "Income") {
-//			value = "Received " + fmt.format(logObject.getAmount()) + " into " + logObject.getAccountFrom() + " from "
-//					+ logObject.getContent() + " for " + logObject.getCategoryTo() + ".";
-//		} else if (transactionType == "Expense") {
-//			value = "Purchased " + logObject.getCategoryTo() + " from " + logObject.getContent() + " for "
-//					+ fmt.format(logObject.getAmount()) + " from " + logObject.getAccountFrom() + ".";
-//		} else if (transactionType == "Transfer") {
-//			System.out.println("Test");
-//		}
-//		return value;
-//	}
-
-//	public static void getStoredLogs() {
-//		if (currentLog == 1) {
-//			allLogs.get(0);
-//			firstDay = Integer.toString(logObject.getDate().getDayOfMonth());
-//			firstDayName = getDayName(logObject.getDate());
-//			firstLabel = getShortenedLog();
-//		}
-//		if (currentLog == 2) {
-//			allLogs.get(1);
-//			secondDay = Integer.toString(logObject.getDate().getDayOfMonth());
-//			secondDayName = getDayName(logObject.getDate());
-//			secondLabel = getShortenedLog();
-//		}
-//		if (currentLog == 3) {
-//			allLogs.get(2);
-//			thirdDay = Integer.toString(logObject.getDate().getDayOfMonth());
-//			thirdDayName = getDayName(logObject.getDate());
-//			thirdLabel = getShortenedLog();
-//		}
-//		if (currentLog == 4) {
-//			allLogs.get(3);
-//			fourthDay = Integer.toString(logObject.getDate().getDayOfMonth());
-//			fourthDayName = getDayName(logObject.getDate());
-//			fourthLabel = getShortenedLog();
-//		}
-//		if (currentLog == 5) {
-//			allLogs.get(4);
-//			fifthDay = Integer.toString(logObject.getDate().getDayOfMonth());
-//			fifthDayName = getDayName(logObject.getDate());
-//			fifthLabel = getShortenedLog();
-//		}
-//	}
-
-//	public static void setLogAndPage() {
-//		currentLog++;
-//		if (currentLog == 6) {
-//			currentLog = 1;
-//			maxPages++;
-//			page++;
-//		}
-//	}
 
 	private static void updateLabels(int currentLog, Log log) {
 		if (currentLog == 1) {

@@ -34,8 +34,6 @@ public class Log implements Serializable {
 					+ getAmount() + " from " + getAccountFrom() + ".";
 		} else if (transactionType.equalsIgnoreCase("transfer")) {
 			summary = "Summary for type: \"Transfer\" not yet added";
-		} else {
-			summary = "This code needs to be changed";
 		}
 
 		return summary;
