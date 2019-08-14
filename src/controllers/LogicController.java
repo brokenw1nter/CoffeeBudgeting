@@ -315,4 +315,33 @@ public class LogicController {
 		}
 	}
 	
+	public static int convertDateToMonth() {
+		int value = 0;
+		LocalDate logDate = logObject.getDate();
+		value = logDate.getMonthValue();
+		return value;
+	}
+	
+	public static int convertDateToYear() {
+		int value = 0;
+		LocalDate logDate = logObject.getDate();
+		value = logDate.getYear();
+		return value;
+	}
+	
+	public static void getCurrentLogs() {
+		for(int i = 0; i > logs.size(); i++) {
+			logs.get(i);
+			int logMonth = convertDateToMonth();
+			int logYear = convertDateToYear();
+			System.out.println("Current Month: " + month + "\nLog Month: " + logMonth
+					+ "\nCurrent Year: " + year + "\nLog Year: " + logYear);
+			if(logMonth == month && logYear == year) {
+				firstDay = Integer.toString(logObject.getDate().getDayOfMonth());
+				firstDayName = getDayName(logObject.getDate());
+				firstLabel = getShortenedLog();
+			}
+		}
+	}
+	
 }
