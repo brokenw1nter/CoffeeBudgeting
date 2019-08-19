@@ -158,7 +158,7 @@ public class SceneController {
 	}
 	
 	@FXML public void logoutProfile(ActionEvent event) {
-		changeScene("fxmls/Login.fxml");
+		changeScene("/fxmls/Login.fxml");
 	}
 	
 	@FXML public void aboutApplication(ActionEvent event) {
