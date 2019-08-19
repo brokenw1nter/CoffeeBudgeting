@@ -32,6 +32,8 @@ public class LogicController {
 	private static double totalFunds;
 	private static double totalIncome;
 	private static double totalExpenses;
+	private static String logFolderPath = "..\\Logs\\";
+	private static String currentProfileName = "default";
 	public static Log logObject;
 	public static String loadedListName = "New List";
 	public static ArrayList<Log> allLogs = new ArrayList<>();
@@ -95,6 +97,8 @@ public class LogicController {
 	public static void newItemList() {
 		loadedListName = "New List";
 		allLogs.clear();
+		resetFunds();
+		clearLabels();
 	}
 
 	public static void saveItemList() {
@@ -195,57 +199,68 @@ public class LogicController {
 		return allLogs;
 	}
 
-	//I was using the autoLoad and autoSave methods for testing - Kevin
-//	@SuppressWarnings("unchecked")
-//	public static void autoLoad() {
-//		File file = new File("C:\\Users\\Kevin\\Desktop\\Projects\\Q4\\Introductory Software Projects\\testlogs.cb");
-//		FileInputStream fileIn = null;
-//		ObjectInputStream in = null;
-//
-//		try {
-//			allLogs = null;
-//			fileIn = new FileInputStream(file);
-//			in = new ObjectInputStream(fileIn);
-//			allLogs = (ArrayList<Log>) in.readObject();
-//		} catch (IOException ioe) {
-//			ioe.printStackTrace();
-//			System.out.println("IOException has been caught.");
-//		} catch (ClassNotFoundException cnfe) {
-//			cnfe.printStackTrace();
-//			System.out.println("ClassNotFoundException has been caught.");
-//		} finally {
-//			try {
-//				in.close();
-//				fileIn.close();
-//			} catch (IOException ioe) {
-//				ioe.printStackTrace();
-//				System.out.println("IOException has been caught.");
-//			}
-//		}
-//	}
-//
-//	public static void autoSave() {
-//		File file = new File("C:\\Users\\Kevin\\Desktop\\Projects\\Q4\\Introductory Software Projects\\testlogs.cb");
-//		FileOutputStream fileOut = null;
-//		ObjectOutputStream out = null;
-//
-//		try {
-//			fileOut = new FileOutputStream(file);
-//			out = new ObjectOutputStream(fileOut);
-//			out.writeObject(allLogs);
-//		} catch (IOException ioe) {
-//			ioe.printStackTrace();
-//			System.out.println("IOException has been caught.");
-//		} finally {
-//			try {
-//				out.close();
-//				fileOut.close();
-//			} catch (IOException ioe) {
-//				ioe.printStackTrace();
-//				System.out.println("IOException has been caught.");
-//			}
-//		}
-//	}
+	@SuppressWarnings("unchecked")
+	public static void autoLoad() {
+		File dir = new File(logFolderPath);
+		File file = new File(logFolderPath + currentProfileName + ".cb");
+		FileInputStream fileIn = null;
+		ObjectInputStream in = null;
+
+		if (dir.exists() && file.exists()) {
+			allLogs.clear();
+			if (file.length() != 0) {
+				try {
+					fileIn = new FileInputStream(file);
+					in = new ObjectInputStream(fileIn);
+					allLogs = (ArrayList<Log>) in.readObject();
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+					System.out.println("IOException has been caught.");
+				} catch (ClassNotFoundException cnfe) {
+					cnfe.printStackTrace();
+					System.out.println("ClassNotFoundException has been caught.");
+				} finally {
+					try {
+						in.close();
+						fileIn.close();
+					} catch (IOException ioe) {
+						ioe.printStackTrace();
+						System.out.println("IOException has been caught.");
+					}
+				}
+			}
+		} else {
+			dir.mkdir();
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void autoSave() {
+		File file = new File(logFolderPath + currentProfileName + ".cb");
+		FileOutputStream fileOut = null;
+		ObjectOutputStream out = null;
+
+		try {
+			fileOut = new FileOutputStream(file);
+			out = new ObjectOutputStream(fileOut);
+			out.writeObject(allLogs);
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			System.out.println("IOException has been caught.");
+		} finally {
+			try {
+				out.close();
+				fileOut.close();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+				System.out.println("IOException has been caught.");
+			}
+		}
+	}
 
 	// ------------ Helper Methods ------------
 	public static String getCurrentMonthYear() {
@@ -281,11 +296,9 @@ public class LogicController {
 		} else if (transactionType.equalsIgnoreCase("Transfer")) {
 			totalExpenses += money;
 			totalFunds -= money;
-		} else {
-			System.out.println(transactionType);
 		}
 	}
-	
+
 	public static void resetFunds() {
 		totalIncome = 0;
 		totalExpenses = 0;
@@ -333,6 +346,7 @@ public class LogicController {
 	}
 
 	public static void updateLogListForMonth() {
+		page = 1;
 		clearLabels();
 		currentLogs.clear();
 		resetFunds();
@@ -348,17 +362,17 @@ public class LogicController {
 		if (currentLogs.size() % 5 > 0) {
 			maxPages += 1;
 		}
-		
+
 		if (maxPages == 0) {
 			maxPages = 1;
 		}
-		
+
 		updatePage();
 	}
 
 	public static void updatePage() {
 		clearLabels();
-		
+
 		Collections.sort(currentLogs, new Comparator<Log>() {
 			public int compare(Log o1, Log o2) {
 				if (o1.getDate() == null || o2.getDate() == null)

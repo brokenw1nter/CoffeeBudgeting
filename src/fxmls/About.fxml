@@ -25,7 +25,7 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="100.0" prefHeight="450.0" prefWidth="426.0" text="This application was made as a project for PRO100 Introductory Software Projects. It is made entirely in Java with the use of JavaFX for the GUI. ------------------------------ Created by Timothy Sely, Joshua Conlon, Kevin, and Dakota." textAlignment="CENTER" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="100.0" prefHeight="450.0" prefWidth="426.0" text="This application was made as a project for PRO100 Introductory Software Projects. It is made entirely in Java with the use of JavaFX for the GUI. ------------------------------ Created by Timothy Sely, Joshua Conlon, Kevin Weeks, and Dakota." textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="30.0" />
          </font>

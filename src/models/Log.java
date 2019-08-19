@@ -1,6 +1,7 @@
 package models;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 public class Log implements Serializable {
@@ -11,6 +12,7 @@ public class Log implements Serializable {
 	private String categoryTo;
 	private double amount;
 	private String content;
+	private static NumberFormat fmt = NumberFormat.getCurrencyInstance();
 	private static final long serialVersionUID = 3147967456736229355L;
 
 	public Log(String transactionType, LocalDate date, String accountFrom, String categoryTo, double amount,
@@ -25,15 +27,17 @@ public class Log implements Serializable {
 
 	public String getLogSummary() {
 		String summary = "";
-		
+
 		if (transactionType.equalsIgnoreCase("income")) {
-			summary = "Received " + getAmount() + " into " + getAccountFrom() + " from "
-					+ getContent() + " for " + getCategoryTo() + ".";
+			summary = "Received " + fmt.format(getAmount()) + " into " + getAccountFrom() + " from " + getContent()
+					+ " for " + getCategoryTo() + ".";
 		} else if (transactionType.equalsIgnoreCase("expense")) {
-			summary = "Purchased " + getCategoryTo() + " from " + getContent() + " for "
-					+ getAmount() + " from " + getAccountFrom() + ".";
+			summary = "Purchased " + getCategoryTo() + " from " + getContent() + " for " + fmt.format(getAmount())
+					+ " from " + getAccountFrom() + ".";
 		} else if (transactionType.equalsIgnoreCase("transfer")) {
-			summary = "Summary for type: \"Transfer\" not yet added";
+			summary = "Transferred " + fmt.format(getAmount()) + " from " + getAccountFrom() + " to " + getCategoryTo()
+					+ " for " + getContent();
+			;
 		}
 
 		return summary;

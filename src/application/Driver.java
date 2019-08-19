@@ -11,10 +11,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.application.Application;
 
 public class Driver extends Application {
-	
-	private double xOffset = 0; 
+
+	private double xOffset = 0;
 	private double yOffset = 0;
-	
+
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -22,7 +22,7 @@ public class Driver extends Application {
 			stage.setTitle("Coffee Budgeting");
 			stage.setResizable(false);
 			stage.initStyle(StageStyle.UNDECORATED);
-			
+
 			// Grabs the Root
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 				@Override
@@ -31,7 +31,7 @@ public class Driver extends Application {
 					yOffset = event.getSceneY();
 				}
 			});
-			
+
 			// Makes the Window Movable
 			root.setOnMouseDragged(new EventHandler<MouseEvent>() {
 				@Override
@@ -40,7 +40,7 @@ public class Driver extends Application {
 					stage.setY(event.getScreenY() - yOffset);
 				}
 			});
-			
+
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/fxmls/Main.css").toExternalForm());
 			stage.setScene(scene);
@@ -50,9 +50,9 @@ public class Driver extends Application {
 			System.out.println("IOException has been caught.");
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 }
