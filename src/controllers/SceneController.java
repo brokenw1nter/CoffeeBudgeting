@@ -10,12 +10,13 @@ import javafx.application.Platform;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.DatePicker;
 
 public class SceneController {
 	
 	private static String currentScene = "Main";
-	private static String previousScene = "Main";
+	private static String previousScene = "Login";
 	private static String previousTab = "NewTransaction";
 	
 	@FXML private MenuBar menuBar = new MenuBar();
@@ -25,18 +26,23 @@ public class SceneController {
 	@FXML private Label totalLabel = new Label();
 	@FXML private Label firstDay = new Label();
 	@FXML private Label firstDayName = new Label();
+	@FXML private ImageView firstImage = new ImageView();
 	@FXML private Label firstLabel = new Label();
 	@FXML private Label secondDay = new Label();
 	@FXML private Label secondDayName = new Label();
+	@FXML private ImageView secondImage = new ImageView();
 	@FXML private Label secondLabel = new Label();
 	@FXML private Label thirdDay = new Label();
 	@FXML private Label thirdDayName = new Label();
+	@FXML private ImageView thirdImage = new ImageView();
 	@FXML private Label thirdLabel = new Label();
 	@FXML private Label fourthDay = new Label();
 	@FXML private Label fourthDayName = new Label();
+	@FXML private ImageView fourthImage = new ImageView();
 	@FXML private Label fourthLabel = new Label();
 	@FXML private Label fifthDay = new Label();
 	@FXML private Label fifthDayName = new Label();
+	@FXML private ImageView fifthImage = new ImageView();
 	@FXML private Label fifthLabel = new Label();
 	@FXML private Label pageLabel = new Label();
 	@FXML private Label transactionLabel = new Label();
@@ -71,6 +77,10 @@ public class SceneController {
 		pageLabel.setText(LogicController.nextPage());
 		LogicController.updatePage();
 		setShortLogs();
+	}
+	
+	@FXML public void newProfile(InputEvent event) {
+		
 	}
 	
 	@FXML public void newTransaction(InputEvent event) {
@@ -141,10 +151,14 @@ public class SceneController {
 	}
 	
 	@FXML public void returnScene(ActionEvent event) {
-		if(previousScene == "Main") {
-			currentScene = "Main";
-			changeScene("/fxmls/Main.fxml");
+		if(previousScene == "Login") {
+			currentScene = "Login";
+			changeScene("/fxmls/Login.fxml");
 		}
+	}
+	
+	@FXML public void logoutProfile(ActionEvent event) {
+		changeScene("fxmls/Login.fxml");
 	}
 	
 	@FXML public void aboutApplication(ActionEvent event) {
