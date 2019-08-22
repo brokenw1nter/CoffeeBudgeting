@@ -18,7 +18,7 @@ public class Driver extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/Main.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/fxmls/Main.fxml"));
 			stage.setTitle("Coffee Budgeting");
 			stage.setResizable(false);
 			stage.initStyle(StageStyle.UNDECORATED);

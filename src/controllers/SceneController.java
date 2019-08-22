@@ -10,73 +10,50 @@ import javafx.application.Platform;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.DatePicker;
 
 public class SceneController {
 
 	private static String currentScene = "Main";
-	private static String previousScene = "Main";
+	private static String previousScene = "Login";
 	private static String previousTab = "NewTransaction";
-
-	@FXML
-	private MenuBar menuBar = new MenuBar();
-	@FXML
-	private Label monthYearLabel = new Label();
-	@FXML
-	private Label incomeLabel = new Label();
-	@FXML
-	private Label expensesLabel = new Label();
-	@FXML
-	private Label totalLabel = new Label();
-	@FXML
-	private Label firstDay = new Label();
-	@FXML
-	private Label firstDayName = new Label();
-	@FXML
-	private Label firstLabel = new Label();
-	@FXML
-	private Label secondDay = new Label();
-	@FXML
-	private Label secondDayName = new Label();
-	@FXML
-	private Label secondLabel = new Label();
-	@FXML
-	private Label thirdDay = new Label();
-	@FXML
-	private Label thirdDayName = new Label();
-	@FXML
-	private Label thirdLabel = new Label();
-	@FXML
-	private Label fourthDay = new Label();
-	@FXML
-	private Label fourthDayName = new Label();
-	@FXML
-	private Label fourthLabel = new Label();
-	@FXML
-	private Label fifthDay = new Label();
-	@FXML
-	private Label fifthDayName = new Label();
-	@FXML
-	private Label fifthLabel = new Label();
-	@FXML
-	private Label pageLabel = new Label();
-	@FXML
-	private Label transactionLabel = new Label();
-	@FXML
-	private Label accountLabel = new Label();
-	@FXML
-	private Label categoryLabel = new Label();
-	@FXML
-	private DatePicker dateSelected = new DatePicker();
-	@FXML
-	private TextField accountFromField = new TextField();
-	@FXML
-	private TextField categoryToField = new TextField();
-	@FXML
-	private TextField amountField = new TextField();
-	@FXML
-	private TextField contentField = new TextField();
-
+	
+	@FXML private MenuBar menuBar = new MenuBar();
+	@FXML private Label monthYearLabel = new Label();
+	@FXML private Label incomeLabel = new Label();
+	@FXML private Label expensesLabel = new Label();
+	@FXML private Label totalLabel = new Label();
+	@FXML private Label firstDay = new Label();
+	@FXML private Label firstDayName = new Label();
+	@FXML private ImageView firstImage = new ImageView();
+	@FXML private Label firstLabel = new Label();
+	@FXML private Label secondDay = new Label();
+	@FXML private Label secondDayName = new Label();
+	@FXML private ImageView secondImage = new ImageView();
+	@FXML private Label secondLabel = new Label();
+	@FXML private Label thirdDay = new Label();
+	@FXML private Label thirdDayName = new Label();
+	@FXML private ImageView thirdImage = new ImageView();
+	@FXML private Label thirdLabel = new Label();
+	@FXML private Label fourthDay = new Label();
+	@FXML private Label fourthDayName = new Label();
+	@FXML private ImageView fourthImage = new ImageView();
+	@FXML private Label fourthLabel = new Label();
+	@FXML private Label fifthDay = new Label();
+	@FXML private Label fifthDayName = new Label();
+	@FXML private ImageView fifthImage = new ImageView();
+	@FXML private Label fifthLabel = new Label();
+	@FXML private Label pageLabel = new Label();
+	@FXML private Label transactionLabel = new Label();
+	@FXML private Label accountLabel = new Label();
+	@FXML private Label categoryLabel = new Label();
+	@FXML private DatePicker dateSelected = new DatePicker();
+	@FXML private TextField accountFromField = new TextField();
+	@FXML private TextField categoryToField = new TextField();
+	@FXML private TextField amountField = new TextField();
+	@FXML private TextField contentField = new TextField();
+	
 	// --------- Methods for Buttons ----------
 	@FXML
 	public void previousMonth(InputEvent event) {
@@ -104,6 +81,10 @@ public class SceneController {
 		pageLabel.setText(LogicController.nextPage());
 		LogicController.updatePage();
 		setShortLogs();
+	}
+	
+	@FXML public void newProfile(InputEvent event) {
+		
 	}
 
 	@FXML
@@ -181,17 +162,19 @@ public class SceneController {
 	public void saveList(ActionEvent event) {
 		LogicController.saveItemList();
 	}
-
-	@FXML
-	public void returnScene(ActionEvent event) {
-		if (previousScene == "Main") {
-			currentScene = "Main";
-			changeScene("/fxmls/Main.fxml");
+	
+	@FXML public void returnScene(ActionEvent event) {
+		if(previousScene == "Login") {
+			currentScene = "Login";
+			changeScene("/fxmls/Login.fxml");
 		}
 	}
-
-	@FXML
-	public void aboutApplication(ActionEvent event) {
+	
+	@FXML public void logoutProfile(ActionEvent event) {
+		changeScene("/fxmls/Login.fxml");
+	}
+	
+	@FXML public void aboutApplication(ActionEvent event) {
 		changeScene("/fxmls/About.fxml");
 	}
 
@@ -259,11 +242,10 @@ public class SceneController {
 		fifthDayName.setText(LogicController.fifthDayName);
 		fifthLabel.setText(LogicController.fifthLabel);
 	}
-
 	private void updateDisplay() {
 		setTotalFunds();
 		pageLabel.setText(LogicController.getCurrentMaxPages());
 		setShortLogs();
 	}
-
+	
 }

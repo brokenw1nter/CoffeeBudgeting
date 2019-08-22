@@ -1,6 +1,15 @@
 package controllers;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.Collections;
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -86,9 +95,9 @@ public class LogicController {
 		}
 		return "Page: " + page + "/" + maxPages;
 	}
-
-	public static void addTransaction(String type, LocalDate date, String accFrom, String catTo, String amount,
-			String cnt) {
+	
+	public static void addTransaction(String type, LocalDate date,
+			String accFrom, String catTo, String amount, String cnt) {
 		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
 		allLogs.add(logObject);
 	}
@@ -130,7 +139,7 @@ public class LogicController {
 				fileOut = new FileOutputStream(file);
 				out = new ObjectOutputStream(fileOut);
 				out.writeObject(allLogs);
-			} catch (IOException ioe) {
+			} catch(IOException ioe) {
 				ioe.printStackTrace();
 				System.out.println("IOException has been caught.");
 			} finally {
@@ -298,13 +307,13 @@ public class LogicController {
 			totalFunds -= money;
 		}
 	}
-
+	
 	public static void resetFunds() {
 		totalIncome = 0;
 		totalExpenses = 0;
 		totalFunds = 0;
 	}
-
+	
 	public static String getFormattedFunds(String type) {
 		String value = null;
 		if (type == "Income") {

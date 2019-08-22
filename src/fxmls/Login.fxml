@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SceneController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
+      <MenuBar fx:id="menuBar" prefHeight="0.0" prefWidth="450.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Coffee Budgeting">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutApplication" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#quitApplication" text="Quit" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="25.0" prefHeight="75.0" prefWidth="450.0" text="Coffee Budgeting">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="100.0" prefHeight="50.0" prefWidth="450.0" text="Please Select a Profile">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="firstImage" fitHeight="75.0" fitWidth="112.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="firstLabel" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" text="    There are no profiles." wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="secondImage" fitHeight="75.0" fitWidth="112.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="secondLabel" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="thirdImage" fitHeight="75.0" fitWidth="112.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="thirdLabel" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="fourthImage" fitHeight="75.0" fitWidth="112.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="fourthLabel" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="fifthImage" fitHeight="75.0" fitWidth="112.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="fifthLabel" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#previousPage" prefHeight="75.0" prefWidth="75.0" text="&lt;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="525.0" prefHeight="75.0" prefWidth="225.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#nextPage" prefHeight="75.0" prefWidth="75.0" text="&gt;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="375.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#newProfile" prefHeight="75.0" prefWidth="75.0" text="+">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
