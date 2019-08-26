@@ -48,6 +48,7 @@ public class SceneController {
 	@FXML private Label transactionLabel = new Label();
 	@FXML private Label accountLabel = new Label();
 	@FXML private Label categoryLabel = new Label();
+	@FXML private Label contentsLabel = new Label();
 	@FXML private DatePicker dateSelected = new DatePicker();
 	@FXML private TextField accountFromField = new TextField();
 	@FXML private TextField categoryToField = new TextField();
@@ -104,6 +105,7 @@ public class SceneController {
 			accountLabel.setText("Account:");
 			categoryLabel.setText("Category:");
 		}
+		contentsLabel.setText("From:");
 	}
 
 	@FXML
@@ -117,6 +119,7 @@ public class SceneController {
 			accountLabel.setText("Account:");
 			categoryLabel.setText("Category:");
 		}
+		contentsLabel.setText("From:");
 	}
 
 	@FXML
@@ -126,6 +129,7 @@ public class SceneController {
 		transactionLabel.setText("Transfer");
 		accountLabel.setText("From:");
 		categoryLabel.setText("To:");
+		contentsLabel.setText("For:");
 	}
 
 	@FXML

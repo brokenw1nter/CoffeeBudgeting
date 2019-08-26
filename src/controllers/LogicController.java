@@ -97,8 +97,8 @@ public class LogicController {
 	public static void newItemList() {
 		loadedListName = "New List";
 		allLogs.clear();
-		resetFunds();
-		clearLabels();
+		updateLogListForMonth();
+		autoSave();
 	}
 
 	public static void saveItemList() {
