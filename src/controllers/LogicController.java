@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Collections;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
@@ -34,6 +35,9 @@ public class LogicController {
 	public static String loadedListName = "New List";
 	public static ArrayList<Log> allLogs = new ArrayList<>();
 	public static ArrayList<Log> currentLogs = new ArrayList<>();
+	public static HashMap<Integer, Double> yearlyIncome = new HashMap<Integer, Double>();
+	public static HashMap<Integer, Double> yearlyExpense = new HashMap<Integer, Double>();
+	public static HashMap<Integer, Double> yearlyTotal = new HashMap<Integer, Double>();
 	private static NumberFormat fmt = NumberFormat.getCurrencyInstance();
 	
 	public static String firstDay, firstDayName, firstLabel = null;
@@ -85,6 +89,14 @@ public class LogicController {
 	
 	public static void addTransaction(String type, LocalDate date,
 			String accFrom, String catTo, String amount, String cnt) {
+		
+		if (amount.contains("$")){
+			amount = amount.replace("$", "");	
+		}
+		
+		if (amount.contains(",")) {
+			amount = amount.replace(",", "");
+		}
 		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
 		allLogs.add(logObject);
 	}
@@ -189,6 +201,46 @@ public class LogicController {
 		}
 		JOptionPane.showConfirmDialog(null, "Items have been loaded.", "Information", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
 		return allLogs;
+	}
+	
+	public static void yearlyTotals() {
+		double value = 0;
+		
+		for(Log l : allLogs) {
+			int year = l.getDate().getYear();
+			
+			if(l.getTransactionType()== "Income") {
+				if(!yearlyIncome.containsKey(year)) {
+					yearlyIncome.put(year, l.getAmount());
+				}else {
+					value = yearlyIncome.get(year) + l.getAmount();
+					yearlyIncome.put(year, value);
+				}
+				
+			}else if(l.getTransactionType()== "Expense") {
+				if(!yearlyExpense.containsKey(year)) {
+					yearlyExpense.put(year, l.getAmount());
+				}else {
+					value = yearlyExpense.get(year) + l.getAmount();
+					yearlyExpense.put(year, value);
+				}
+			}
+			
+			if(!yearlyTotal.containsKey(year)) {
+				value = yearlyIncome.get(year) - yearlyExpense.get(year);
+				yearlyTotal.put(year, value);
+			}else{
+				if(l.getTransactionType() == "Income") {
+					value = yearlyTotal.get(year) + l.getAmount();
+					yearlyTotal.put(year, value);
+				}else {
+					value = yearlyTotal.get(year) - l.getAmount();
+					yearlyTotal.put(year, value);
+				}
+			}
+			
+		}
+		
 	}
 	
 	// ------------ Helper Methods ------------

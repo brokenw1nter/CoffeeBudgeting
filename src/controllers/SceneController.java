@@ -138,6 +138,8 @@ public class SceneController {
 	// ------ Methods for Menu Bar Items ------
 	@FXML public void newList(ActionEvent evnet) {
 		LogicController.newItemList();
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void loadList(ActionEvent event) {
