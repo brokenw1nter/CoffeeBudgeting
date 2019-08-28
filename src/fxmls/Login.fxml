@@ -33,46 +33,46 @@
          </font>
       </Label>
       <ImageView fx:id="firstImage" fitHeight="75.0" fitWidth="112.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="firstLabel" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" text="    There are no profiles." wrapText="true">
+      <Label fx:id="firstProfileLabel" layoutX="112.0" layoutY="150.0" prefHeight="75.0" prefWidth="338.0" text="    There are no profiles." wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="secondImage" fitHeight="75.0" fitWidth="112.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="secondLabel" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+      <Label fx:id="secondProfileLabel" layoutX="112.0" layoutY="225.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="thirdImage" fitHeight="75.0" fitWidth="112.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="thirdLabel" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+      <Label fx:id="thirdProfileLabel" layoutX="112.0" layoutY="300.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="fourthImage" fitHeight="75.0" fitWidth="112.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="fourthLabel" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+      <Label fx:id="fourthProfileLabel" layoutX="112.0" layoutY="375.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="fifthImage" fitHeight="75.0" fitWidth="112.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="fifthLabel" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
+      <Label fx:id="fifthProfileLabel" layoutX="112.0" layoutY="450.0" prefHeight="75.0" prefWidth="338.0" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#previousPage" prefHeight="75.0" prefWidth="75.0" text="&lt;">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#previousProfilePage" prefHeight="75.0" prefWidth="75.0" text="&lt;">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="pageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="525.0" prefHeight="75.0" prefWidth="225.0">
+      <Label fx:id="profilePageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="525.0" prefHeight="75.0" prefWidth="225.0">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#nextPage" prefHeight="75.0" prefWidth="75.0" text="&gt;">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#nextProfilePage" prefHeight="75.0" prefWidth="75.0" text="&gt;">
          <font>
             <Font size="24.0" />
          </font>

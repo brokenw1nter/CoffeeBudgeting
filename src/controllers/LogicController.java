@@ -29,11 +29,14 @@ public class LogicController {
 	private static int month;
 	private static int page = 1;
 	private static int maxPages = 1;
+	private static int profilePage = 1;
+	private static int maxProfilePages = 1;
 	private static double totalFunds;
 	private static double totalIncome;
 	private static double totalExpenses;
 	private static String logFolderPath = "..\\Logs\\";
 	private static String currentProfileName = "default";
+	private static ArrayList<String> profiles = new ArrayList<>();
 	public static Log logObject;
 	public static String loadedListName = "New List";
 	public static ArrayList<Log> allLogs = new ArrayList<>();
@@ -45,6 +48,9 @@ public class LogicController {
 	public static String thirdDay, thirdDayName, thirdLabel = null;
 	public static String fourthDay, fourthDayName, fourthLabel = null;
 	public static String fifthDay, fifthDayName, fifthLabel = null;
+
+	public static String firstProfileLabel, secondProfileLabel, thirdProfileLabel, fourthProfileLabel,
+			fifthProfileLabel = "";
 
 	// --------- Methods for Buttons ----------
 	public static String previousMonth() {
@@ -86,9 +92,23 @@ public class LogicController {
 		}
 		return "Page: " + page + "/" + maxPages;
 	}
-	
-	public static void addTransaction(String type, LocalDate date,
-			String accFrom, String catTo, String amount, String cnt) {
+
+	public static String nextProfilePage() {
+		if (profilePage != maxProfilePages) {
+			profilePage++;
+		}
+		return "Page: " + profilePage + "/" + maxProfilePages;
+	}
+
+	public static String previousProfilePage() {
+		if (profilePage != 1) {
+			profilePage--;
+		}
+		return "Page: " + profilePage + "/" + maxProfilePages;
+	}
+
+	public static void addTransaction(String type, LocalDate date, String accFrom, String catTo, String amount,
+			String cnt) {
 		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
 		allLogs.add(logObject);
 	}
@@ -130,7 +150,7 @@ public class LogicController {
 				fileOut = new FileOutputStream(file);
 				out = new ObjectOutputStream(fileOut);
 				out.writeObject(allLogs);
-			} catch(IOException ioe) {
+			} catch (IOException ioe) {
 				ioe.printStackTrace();
 				System.out.println("IOException has been caught.");
 			} finally {
@@ -199,6 +219,7 @@ public class LogicController {
 		return allLogs;
 	}
 
+	// ------------ Load/Save Methods ------------
 	@SuppressWarnings("unchecked")
 	public static void autoLoad() {
 		File dir = new File(logFolderPath);
@@ -229,8 +250,14 @@ public class LogicController {
 					}
 				}
 			}
-		} else {
+		} else if (!dir.exists()) {
 			dir.mkdir();
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -262,6 +289,22 @@ public class LogicController {
 		}
 	}
 
+	public static void createNewProfile(String profileName) {
+		File dir = new File(logFolderPath);
+		File file = new File(logFolderPath + profileName + ".cb");
+		if (dir.exists() && !file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void selectProfile(String profileName) {
+		currentProfileName = profileName;
+	}
+
 	// ------------ Helper Methods ------------
 	public static String getCurrentMonthYear() {
 		String value = null;
@@ -285,6 +328,10 @@ public class LogicController {
 		return "Page: " + page + "/" + maxPages;
 	}
 
+	public static String getCurrentProfileMaxPages() {
+		return "Page: " + profilePage + "/" + maxProfilePages;
+	}
+
 	public static void calculateFunds(String transactionType, double amount) {
 		double money = amount;
 		if (transactionType.equalsIgnoreCase("Income")) {
@@ -298,13 +345,13 @@ public class LogicController {
 			totalFunds -= money;
 		}
 	}
-	
+
 	public static void resetFunds() {
 		totalIncome = 0;
 		totalExpenses = 0;
 		totalFunds = 0;
 	}
-	
+
 	public static String getFormattedFunds(String type) {
 		String value = null;
 		if (type == "Income") {
@@ -409,6 +456,83 @@ public class LogicController {
 		fifthDay = "";
 		fifthDayName = "";
 		fifthLabel = "";
+	}
+
+	private static void clearProfileLabels() {
+		firstProfileLabel = "";
+		secondProfileLabel = "";
+		thirdProfileLabel = "";
+		fourthProfileLabel = "";
+		fifthProfileLabel = "";
+	}
+
+	public static void getProfilesFromDir() {
+		File dir = new File(logFolderPath);
+		File[] filesInDir = dir.listFiles();
+		profiles.clear();
+		profilePage = 1;
+
+		for (File file : filesInDir) {
+			String filename = file.getName().substring(0, file.getName().length() - 3);
+			profiles.add(filename);
+		}
+
+		maxProfilePages = profiles.size() / 5;
+		if (profiles.size() % 5 > 0) {
+			maxProfilePages += 1;
+		}
+
+		if (maxProfilePages == 0) {
+			maxProfilePages = 1;
+		}
+
+		updateProfilesForPage();
+	}
+
+	public static void updateProfilesForPage() {
+		clearProfileLabels();
+
+		int test = (profilePage - 1) * 5;
+		int logNum = 1;
+
+		for (int i = test; i < test + 5; i++) {
+			if (i < profiles.size()) {
+				setProfileLabels(profiles.get(i), logNum);
+				logNum++;
+			}
+		}
+	}
+
+	public static void setProfileLabels(String profile, int profileNum) {
+		switch (profileNum) {
+		case 1:
+			if (profile != null && !profile.isEmpty()) {
+				firstProfileLabel = profile;
+			}
+			break;
+		case 2:
+			if (profile != null && !profile.isEmpty()) {
+				secondProfileLabel = profile;
+			}
+			break;
+		case 3:
+			if (profile != null && !profile.isEmpty()) {
+				thirdProfileLabel = profile;
+			}
+			break;
+		case 4:
+			if (profile != null && !profile.isEmpty()) {
+				fourthProfileLabel = profile;
+			}
+			break;
+		case 5:
+			if (profile != null && !profile.isEmpty()) {
+				fifthProfileLabel = profile;
+			}
+			break;
+		default:
+			System.out.println("test");
+		}
 	}
 
 }

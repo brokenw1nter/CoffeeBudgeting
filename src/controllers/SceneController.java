@@ -54,6 +54,12 @@ public class SceneController {
 	@FXML private TextField categoryToField = new TextField();
 	@FXML private TextField amountField = new TextField();
 	@FXML private TextField contentField = new TextField();
+	@FXML private Label firstProfileLabel = new Label();
+	@FXML private Label secondProfileLabel = new Label();
+	@FXML private Label thirdProfileLabel = new Label();
+	@FXML private Label fourthProfileLabel = new Label();
+	@FXML private Label fifthProfileLabel = new Label();
+	@FXML private Label profilePageLabel = new Label();
 	
 	// --------- Methods for Buttons ----------
 	@FXML
@@ -88,6 +94,18 @@ public class SceneController {
 		
 	}
 
+	@FXML public void previousProfilePage(InputEvent event) {
+		profilePageLabel.setText(LogicController.previousProfilePage());
+		LogicController.updateProfilesForPage();
+		setProfileLabels();
+	}
+
+	@FXML public void nextProfilePage(InputEvent event) {
+		profilePageLabel.setText(LogicController.nextProfilePage());
+		LogicController.updateProfilesForPage();
+		setProfileLabels();
+	}
+	
 	@FXML
 	public void newTransaction(InputEvent event) {
 		currentScene = "Expense";
@@ -195,6 +213,10 @@ public class SceneController {
 		LogicController.updateLogListForMonth();
 		LogicController.updatePage();
 		updateDisplay();
+		
+		
+		LogicController.getProfilesFromDir();
+		setProfileLabels();
 	}
 
 	public void changeScene(String path) {
@@ -246,10 +268,20 @@ public class SceneController {
 		fifthDayName.setText(LogicController.fifthDayName);
 		fifthLabel.setText(LogicController.fifthLabel);
 	}
+	
 	private void updateDisplay() {
 		setTotalFunds();
 		pageLabel.setText(LogicController.getCurrentMaxPages());
 		setShortLogs();
+	}
+	
+	private void setProfileLabels() {
+		firstProfileLabel.setText(LogicController.firstProfileLabel);
+		secondProfileLabel.setText(LogicController.secondProfileLabel);
+		thirdProfileLabel.setText(LogicController.thirdProfileLabel);
+		fourthProfileLabel.setText(LogicController.fourthProfileLabel);
+		fifthProfileLabel.setText(LogicController.fifthProfileLabel);
+		profilePageLabel.setText(LogicController.getCurrentProfileMaxPages());
 	}
 	
 }
