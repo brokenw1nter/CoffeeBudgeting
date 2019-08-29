@@ -23,6 +23,22 @@ public class Log implements Serializable {
 		setContent(content);
 	}
 	
+	public String getLogSummary() {
+		String summary = "";
+		
+		if (transactionType.equalsIgnoreCase("income")) {
+			summary = "Received " + getAmount() + " into " + getAccountFrom() + " from "
+					+ getContent() + " for " + getCategoryTo() + ".";
+		} else if (transactionType.equalsIgnoreCase("expense")) {
+			summary = "Purchased " + getCategoryTo() + " from " + getContent() + " for "
+					+ getAmount() + " from " + getAccountFrom() + ".";
+		} else if (transactionType.equalsIgnoreCase("transfer")) {
+			summary = "Summary for type: \"Transfer\" not yet added";
+		}
+		
+		return summary;
+	}
+	
 	public String getTransactionType() {
 		return transactionType;
 	}

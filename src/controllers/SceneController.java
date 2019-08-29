@@ -10,12 +10,13 @@ import javafx.application.Platform;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.InputEvent;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.DatePicker;
 
 public class SceneController {
 	
 	private static String currentScene = "Main";
-	private static String previousScene = "Main";
+	private static String previousScene = "Login";
 	private static String previousTab = "NewTransaction";
 	
 	@FXML private MenuBar menuBar = new MenuBar();
@@ -23,20 +24,29 @@ public class SceneController {
 	@FXML private Label incomeLabel = new Label();
 	@FXML private Label expensesLabel = new Label();
 	@FXML private Label totalLabel = new Label();
+	@FXML private Label yearLabel = new Label();
+	@FXML private Label yearlyIncomeLabel = new Label();
+	@FXML private Label yearlyExpensesLabel = new Label();
+	@FXML private Label yearlyTotalLabel = new Label();
 	@FXML private Label firstDay = new Label();
 	@FXML private Label firstDayName = new Label();
+	@FXML private ImageView firstImage = new ImageView();
 	@FXML private Label firstLabel = new Label();
 	@FXML private Label secondDay = new Label();
 	@FXML private Label secondDayName = new Label();
+	@FXML private ImageView secondImage = new ImageView();
 	@FXML private Label secondLabel = new Label();
 	@FXML private Label thirdDay = new Label();
 	@FXML private Label thirdDayName = new Label();
+	@FXML private ImageView thirdImage = new ImageView();
 	@FXML private Label thirdLabel = new Label();
 	@FXML private Label fourthDay = new Label();
 	@FXML private Label fourthDayName = new Label();
+	@FXML private ImageView fourthImage = new ImageView();
 	@FXML private Label fourthLabel = new Label();
 	@FXML private Label fifthDay = new Label();
 	@FXML private Label fifthDayName = new Label();
+	@FXML private ImageView fifthImage = new ImageView();
 	@FXML private Label fifthLabel = new Label();
 	@FXML private Label pageLabel = new Label();
 	@FXML private Label transactionLabel = new Label();
@@ -51,18 +61,40 @@ public class SceneController {
 	// --------- Methods for Buttons ----------
 	@FXML public void previousMonth(InputEvent event) {
 		monthYearLabel.setText(LogicController.previousMonth());
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void nextMonth(InputEvent event) {
 		monthYearLabel.setText(LogicController.nextMonth());
+		LogicController.updateLogListForMonth();
+		updateDisplay();
+	}
+	
+	@FXML public void previousYear(InputEvent event) {
+		yearLabel.setText(LogicController.previousYear());
+		setYearlyTotals();
+	}
+	
+	@FXML public void nextYear(InputEvent event) {
+		yearLabel.setText(LogicController.nextYear());
+		setYearlyTotals();
 	}
 	
 	@FXML public void previousPage(InputEvent event) {
 		pageLabel.setText(LogicController.previousPage());
+		LogicController.updatePage();
+		setShortLogs();
 	}
 	
 	@FXML public void nextPage(InputEvent event) {
 		pageLabel.setText(LogicController.nextPage());
+		LogicController.updatePage();
+		setShortLogs();
+	}
+	
+	@FXML public void newProfile(InputEvent event) {
+		
 	}
 	
 	@FXML public void newTransaction(InputEvent event) {
@@ -112,16 +144,22 @@ public class SceneController {
 				dateSelected.getValue(), accountFromField.getText(),
 				categoryToField.getText(), amountField.getText(),
 				contentField.getText());
+		LogicController.updateLogListForMonth();
+		setShortLogs();
 		changeScene("/fxmls/Main.fxml");
 	}
 	
 	// ------ Methods for Menu Bar Items ------
 	@FXML public void newList(ActionEvent evnet) {
 		LogicController.newItemList();
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void loadList(ActionEvent event) {
 		LogicController.loadItemList();
+		LogicController.updateLogListForMonth();
+		updateDisplay();
 	}
 	
 	@FXML public void saveList(ActionEvent event) {
@@ -129,14 +167,22 @@ public class SceneController {
 	}
 	
 	@FXML public void returnScene(ActionEvent event) {
-		if(previousScene == "Main") {
-			currentScene = "Main";
+			updateDisplay();
 			changeScene("/fxmls/Main.fxml");
 		}
+	
+	@FXML public void logoutProfile(ActionEvent event) {
+		updateDisplay();
+		changeScene("/fxmls/Login.fxml");
 	}
 	
 	@FXML public void aboutApplication(ActionEvent event) {
 		changeScene("/fxmls/About.fxml");
+	}
+	
+	@FXML public void yearlyTotals(ActionEvent event) {
+		setYearlyTotals();
+		changeScene("/fxmls/YearlyTotals.fxml");
 	}
 	
 	@FXML public void quitApplication(ActionEvent event) {
@@ -146,9 +192,9 @@ public class SceneController {
 	// ------------ Helper Methods ------------
 	public void initialize() {
 		monthYearLabel.setText(LogicController.getCurrentMonthYear());
-		setTotalFunds();
-		setShortLogs();
-		pageLabel.setText(LogicController.getCurrentMaxPages());
+		yearLabel.setText(LogicController.getCurrentYear());
+		setYearlyTotals();
+		updateDisplay();
 	}
 	
 	public void changeScene(String path) {
@@ -164,11 +210,21 @@ public class SceneController {
 	}
 	
 	public void setTotalFunds() {
-		incomeLabel.setTextFill(Color.BLUE);
+		incomeLabel.setTextFill(Color.FORESTGREEN);
 		incomeLabel.setText(LogicController.getFormattedFunds("Income"));
 		expensesLabel.setTextFill(Color.RED);
 		expensesLabel.setText(LogicController.getFormattedFunds("Expenses"));
+		totalLabel.setTextFill(Color.BLUE);
 		totalLabel.setText(LogicController.getFormattedFunds("Total"));
+	}
+	
+	public void setYearlyTotals() {
+		yearlyIncomeLabel.setTextFill(Color.FORESTGREEN);
+		yearlyIncomeLabel.setText(LogicController.getYearlyInfo("Income"));
+		yearlyExpensesLabel.setTextFill(Color.RED);
+		yearlyExpensesLabel.setText(LogicController.getYearlyInfo("Expenses"));
+		yearlyTotalLabel.setTextFill(Color.BLUE);
+		yearlyTotalLabel.setText(LogicController.getYearlyInfo("Total"));
 	}
 	
 	public void setShortLogs() {
@@ -187,6 +243,12 @@ public class SceneController {
 		fifthDay.setText(LogicController.fifthDay);
 		fifthDayName.setText(LogicController.fifthDayName);
 		fifthLabel.setText(LogicController.fifthLabel);
+	}
+	
+	private void updateDisplay() {
+		setTotalFunds();
+		pageLabel.setText(LogicController.getCurrentMaxPages());
+		setShortLogs();
 	}
 	
 }

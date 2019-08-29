@@ -15,7 +15,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Coffee Budgeting">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#returnScene" text="Return" />
+              <MenuItem mnemonicParsing="false" onAction="#logoutProfile" text="Return" />
             </items>
           </Menu>
         </menus>
