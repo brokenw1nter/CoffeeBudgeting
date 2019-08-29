@@ -24,6 +24,10 @@ public class SceneController {
 	@FXML private Label incomeLabel = new Label();
 	@FXML private Label expensesLabel = new Label();
 	@FXML private Label totalLabel = new Label();
+	@FXML private Label yearLabel = new Label();
+	@FXML private Label yearlyIncomeLabel = new Label();
+	@FXML private Label yearlyExpensesLabel = new Label();
+	@FXML private Label yearlyTotalLabel = new Label();
 	@FXML private Label firstDay = new Label();
 	@FXML private Label firstDayName = new Label();
 	@FXML private ImageView firstImage = new ImageView();
@@ -65,6 +69,16 @@ public class SceneController {
 		monthYearLabel.setText(LogicController.nextMonth());
 		LogicController.updateLogListForMonth();
 		updateDisplay();
+	}
+	
+	@FXML public void previousYear(InputEvent event) {
+		yearLabel.setText(LogicController.previousYear());
+		setYearlyTotals();
+	}
+	
+	@FXML public void nextYear(InputEvent event) {
+		yearLabel.setText(LogicController.nextYear());
+		setYearlyTotals();
 	}
 	
 	@FXML public void previousPage(InputEvent event) {
@@ -153,18 +167,22 @@ public class SceneController {
 	}
 	
 	@FXML public void returnScene(ActionEvent event) {
-		if(previousScene == "Login") {
-			currentScene = "Login";
-			changeScene("/fxmls/Login.fxml");
+			updateDisplay();
+			changeScene("/fxmls/Main.fxml");
 		}
-	}
 	
 	@FXML public void logoutProfile(ActionEvent event) {
+		updateDisplay();
 		changeScene("/fxmls/Login.fxml");
 	}
 	
 	@FXML public void aboutApplication(ActionEvent event) {
 		changeScene("/fxmls/About.fxml");
+	}
+	
+	@FXML public void yearlyTotals(ActionEvent event) {
+		setYearlyTotals();
+		changeScene("/fxmls/YearlyTotals.fxml");
 	}
 	
 	@FXML public void quitApplication(ActionEvent event) {
@@ -174,6 +192,8 @@ public class SceneController {
 	// ------------ Helper Methods ------------
 	public void initialize() {
 		monthYearLabel.setText(LogicController.getCurrentMonthYear());
+		yearLabel.setText(LogicController.getCurrentYear());
+		setYearlyTotals();
 		updateDisplay();
 	}
 	
@@ -196,6 +216,15 @@ public class SceneController {
 		expensesLabel.setText(LogicController.getFormattedFunds("Expenses"));
 		totalLabel.setTextFill(Color.BLUE);
 		totalLabel.setText(LogicController.getFormattedFunds("Total"));
+	}
+	
+	public void setYearlyTotals() {
+		yearlyIncomeLabel.setTextFill(Color.FORESTGREEN);
+		yearlyIncomeLabel.setText(LogicController.getYearlyInfo("Income"));
+		yearlyExpensesLabel.setTextFill(Color.RED);
+		yearlyExpensesLabel.setText(LogicController.getYearlyInfo("Expenses"));
+		yearlyTotalLabel.setTextFill(Color.BLUE);
+		yearlyTotalLabel.setText(LogicController.getYearlyInfo("Total"));
 	}
 	
 	public void setShortLogs() {

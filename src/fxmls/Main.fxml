@@ -19,6 +19,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#newList" text="New" />
                   <MenuItem mnemonicParsing="false" onAction="#loadList" text="Load" />
                   <MenuItem mnemonicParsing="false" onAction="#saveList" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#yearlyTotals" text="Yearly Totals" />
                   <MenuItem mnemonicParsing="false" onAction="#logoutProfile" text="Logout" />
               <MenuItem mnemonicParsing="false" onAction="#quitApplication" text="Quit" />
             </items>

@@ -73,6 +73,20 @@ public class LogicController {
 		return value;
 	}
 	
+	public static String previousYear() {
+		String value = null;
+		year--;
+		value = year +"";
+		return value;
+	}
+	
+	public static String nextYear() {
+		String value = null;
+		year++;
+		value = year +"";
+		return value;
+	}
+	
 	public static String previousPage() {
 		if(page != 1) {
 			page--;
@@ -99,12 +113,14 @@ public class LogicController {
 		}
 		logObject = new Log(type, date, accFrom, catTo, Double.parseDouble(amount), cnt);
 		allLogs.add(logObject);
+		yearlyTotals(logObject);
 	}
 	
 	// ------ Methods for Menu Bar Items ------
 	public static void newItemList() {
 		loadedListName = "New List";
 		allLogs.clear();
+		yearlyTotalAll();
 	}
 	
 	public static void saveItemList() {
@@ -200,24 +216,22 @@ public class LogicController {
 			}
 		}
 		JOptionPane.showConfirmDialog(null, "Items have been loaded.", "Information", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE);
+		yearlyTotalAll();
 		return allLogs;
 	}
 	
-	public static void yearlyTotals() {
-		double value = 0;
-		
-		for(Log l : allLogs) {
+	public static void yearlyTotals(Log l) {
+		double value = 0.00;
 			int year = l.getDate().getYear();
 			
-			if(l.getTransactionType()== "Income") {
+			if(l.getTransactionType().equalsIgnoreCase("Income")) {
 				if(!yearlyIncome.containsKey(year)) {
 					yearlyIncome.put(year, l.getAmount());
 				}else {
 					value = yearlyIncome.get(year) + l.getAmount();
 					yearlyIncome.put(year, value);
-				}
-				
-			}else if(l.getTransactionType()== "Expense") {
+				}	
+			}else if(l.getTransactionType().equalsIgnoreCase("Expense")) {
 				if(!yearlyExpense.containsKey(year)) {
 					yearlyExpense.put(year, l.getAmount());
 				}else {
@@ -227,20 +241,33 @@ public class LogicController {
 			}
 			
 			if(!yearlyTotal.containsKey(year)) {
-				value = yearlyIncome.get(year) - yearlyExpense.get(year);
-				yearlyTotal.put(year, value);
-			}else{
-				if(l.getTransactionType() == "Income") {
-					value = yearlyTotal.get(year) + l.getAmount();
+				if(yearlyIncome.containsKey(year) && yearlyExpense.containsKey(year)) {
+					value = yearlyIncome.get(year) - yearlyExpense.get(year);
+					yearlyTotal.put(year, value);
+				}else if(yearlyIncome.containsKey(year) && !yearlyExpense.containsKey(year)) {
+					value = yearlyIncome.get(year);
+					yearlyTotal.put(year, value);
+				}else if(!yearlyIncome.containsKey(year) && yearlyExpense.containsKey(year)) {
+					value = 0 - yearlyExpense.get(year);
 					yearlyTotal.put(year, value);
 				}else {
+					yearlyTotal.put(year, 0.00);
+				}
+			}else{
+				if(l.getTransactionType().equalsIgnoreCase("Income")) {
+					value = yearlyTotal.get(year) + l.getAmount();
+					yearlyTotal.replace(year, value);
+				}else if(l.getTransactionType().equalsIgnoreCase("Expense")) {
 					value = yearlyTotal.get(year) - l.getAmount();
-					yearlyTotal.put(year, value);
+					yearlyTotal.replace(year, value);
 				}
 			}
-			
 		}
-		
+	
+	public static void yearlyTotalAll() {
+		for(Log l: allLogs) {
+			yearlyTotals(l);
+		}
 	}
 	
 	// ------------ Helper Methods ------------
@@ -250,6 +277,14 @@ public class LogicController {
 		month = cal.get(Calendar.MONTH) + 1;
 		year = cal.get(Calendar.YEAR);
 		value = getMonthName(month) + " " + year;
+		return value;
+	}
+	
+	public static String getCurrentYear() {
+		String value = null;
+		Calendar cal = Calendar.getInstance();
+		year = cal.get(Calendar.YEAR);
+		value = year + "";
 		return value;
 	}
 	
@@ -294,6 +329,24 @@ public class LogicController {
 			value = fmt.format(totalExpenses);
 		} else if(type == "Total") {
 			value = fmt.format(totalFunds);
+		}
+		return value;
+	}
+	
+	public static String getYearlyInfo(String type) {
+		String value = "0.00";
+		if(type == "Income") {
+			if(yearlyIncome.containsKey(year)) {
+				value = fmt.format(yearlyIncome.get(year));
+			}
+		} else if(type == "Expenses") {
+			if(yearlyExpense.containsKey(year)) {
+				value = fmt.format(yearlyExpense.get(year));
+			}
+		} else if(type == "Total") {
+			if(yearlyTotal.containsKey(year)) {
+				value = fmt.format(yearlyTotal.get(year));
+			}
 		}
 		return value;
 	}
